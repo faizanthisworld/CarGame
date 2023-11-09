@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="Car.js"></script>
+    <script src="BtnControls.js"></script>
     <script src="Obstacle.js"></script>
     <script src="Controls.js"></script>
     <script src="script.js" defer></script>
@@ -20,10 +21,46 @@
         img {
             display : none;
         }
+        button {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 0.5rem;
+            color: white;
+            width: 4rem;
+            margin: auto;
+            background-color: black;
+
+        }
+        #bottom {
+            grid-column: 2;
+        }
+        #btnControls {
+            display: none;
+            margin: auto;
+            width: 20rem;
+            height: 5rem;
+           
+        }
+        @media(max-width :800px) {
+            #btnControls {
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                }
+        }
+        
+       
+      
     </style>
 </head>
 <body>
     <img src="mycar.png" alt="">
     <canvas id="canvas"></canvas>
+    <div id="btnControls">
+        <button id="left">←</button>
+        <button id="top">↑</button>
+        <button id="right">→</button>
+        <button id="bottom">↓</button>
+    </div>
 </body>
 </html>
