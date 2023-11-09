@@ -1,20 +1,15 @@
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
- 
- 
+
 const topBtn = document.querySelector("#top")
 const bottomBtn = document.querySelector("#bottom")
 const leftBtn = document.querySelector("#left")
 const rightBtn = document.querySelector("#right")
 
  
-const btnControls= new BtnControls(leftBtn,rightBtn,topBtn,bottomBtn) 
-const car = new Car(canvas.width/2,canvas.height,btnControls);
+const car = new Car(canvas.width/2,canvas.height,[topBtn,bottomBtn,leftBtn,rightBtn]);
 const obstacle = new Obstacle(10,10,50,50)
 const img  = document.querySelector("img")
- 
-
-
  
 function animate() {
     canvas.height = window.innerHeight - 200
