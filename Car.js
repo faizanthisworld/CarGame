@@ -1,5 +1,5 @@
 class Car {
-  constructor(x, y, width = 50, height = 60, color = "red") {
+  constructor(x, y,btnControls, width = 50, height = 60, color = "red") {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -10,22 +10,23 @@ class Car {
     this.maxSpeed = 5;
     this.accleration = 0.5;
     this.friction = 0.1;
+    this.btnControls = btnControls
 
     this.controls = new Controls();
   }
   Update() {
-    
-    if (this.controls.forward) {
+    console.log(this.btnControls)
+    if (this.controls.forward || this.btnControls.top) {
       this.speed -= this.accleration;
     }
-    if (this.controls.reverse) {
+    if (this.controls.reverse || this.btnControls.bottom) {
       this.speed += this.accleration;
     }
 
-    if (this.controls.left) {
+    if (this.controls.left || this.btnControls.left) {
       this.angle -= 0.03;
     }
-    if (this.controls.right) {
+    if (this.controls.right || this.btnControls.right) {
       this.angle += 0.03;
     }
     if (this.speed > this.maxSpeed) {
