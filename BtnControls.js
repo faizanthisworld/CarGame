@@ -23,6 +23,7 @@ class BtnControls {
                     this.bottom = true
                     break
             }
+            console.table(this)
             alert(e.target)
          })
          document.addEventListener("ontouchend", (e) => {
@@ -40,6 +41,7 @@ class BtnControls {
                     this.bottom = false
                     break
             }
+            console.table(this)
             alert(e.target)
          })
     }
