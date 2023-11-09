@@ -1,5 +1,5 @@
 class Car {
-  constructor(x, y,btnControls, width = 50, height = 60, color = "red") {
+  constructor(x, y,btns, width = 50, height = 60, color = "red") {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -10,61 +10,35 @@ class Car {
     this.maxSpeed = 5;
     this.accleration = 0.5;
     this.friction = 0.1;
-    this.btnControls = btnControls
-
-    this.controls = new Controls();
+    this.controls = new Controls(btns);
   }
   Update() {
-    console.log(this.btnControls)
-    if (this.controls.forward || this.btnControls.top) {
-      this.speed -= this.accleration;
-    }
-    if (this.controls.reverse || this.btnControls.bottom) {
-      this.speed += this.accleration;
-    }
+    if (this.controls.forward) {this.speed -= this.accleration;}
+    if (this.controls.reverse) {this.speed += this.accleration;}
+    if (this.controls.left) {this.angle -= 0.03;}
+    if (this.controls.right) {this.angle += 0.03;}
+    if (this.speed > this.maxSpeed) {this.speed = this.maxSpeed;}
+    if (this.speed < -this.maxSpeed) {this.speed = -this.maxSpeed}
+    if (this.speed > 0) {this.speed -= this.friction }
+    if (this.speed < 0) {this.speed += this.friction}
+    if (Math.abs(this.speed) < this.friction) {this.speed = 0;}  
 
-    if (this.controls.left || this.btnControls.left) {
-      this.angle -= 0.03;
-    }
-    if (this.controls.right || this.btnControls.right) {
-      this.angle += 0.03;
-    }
-    if (this.speed > this.maxSpeed) {
-      this.speed = this.maxSpeed;
-    }
-    if(this.speed < -this.maxSpeed) {
-      this.speed = -this.maxSpeed
-    }
-
-    if(this.speed > 0) {
-      this.speed -= this.friction
-    }
-    if(this.speed < 0) {
-      this.speed += this.friction
-    }
-
-    if (Math.abs(this.speed) < this.friction) {
-      this.speed = 0;
-    } 
+    if(this.x > canvas.width - this.width/2) {this.x = canvas.width - this.width/2}
+    if(this.y < this.width/2) {this.y = this.width/2}
+    if(this.x < this.height/2) {this.x = this.height/2}
+    if(this.y > canvas.height- this.height/2 ) {this.y = canvas.height - this.height/2}
     this.y += Math.cos(this.angle) * this.speed;
-     this.x -= Math.sin(this.angle) * this.speed;
+    this.x -= Math.sin(this.angle) * this.speed;
   }
   draw(ctx,img=null) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = this.color;
-
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle);
     ctx.beginPath();
-    if(img) {
-      ctx.drawImage(img,-this.width/2,-this.height/2,this.width,this.height)
-    }
-    else {
-
-      ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
-    }
-
+    if(img) { ctx.drawImage(img,-this.width/2,-this.height/2,this.width,this.height) }
+    else {ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height); }
     ctx.restore();
   }
 }
