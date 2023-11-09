@@ -1,42 +1,78 @@
 class Controls {
-  constructor() {
+  constructor(btns) {
     this.left = false;
     this.right = false;
     this.forward = false;
     this.reverse = false;
-    this.#addEventListener();
+    this.#addEventListener(btns);
   }
-  #addEventListener() {
+  #addEventListener(btns) {
+    if (btns) {
+      const [t, d, l, r] = btns;
+      document.addEventListener("touchstart", (e) => {
+        switch (e.target) {
+          case t:
+            this.forward = true;
+            break;
+          case d:
+            this.reverse = true;
+            break;
+          case l:
+            this.left = true;
+            break;
+          case r:
+            this.right = true;
+            break;
+        }
+      });
+      document.addEventListener("touchend", (e) => {
+        switch (e.target) {
+          case t:
+            this.forward = false;
+            break;
+          case d:
+            this.reverse = false;
+            break;
+          case l:
+            this.left = false;
+            break;
+          case r:
+            this.right = false;
+            break;
+        }
+      });
+    }
+
     document.addEventListener("keydown", (e) => {
       switch (e.key) {
         case "ArrowUp":
           this.forward = true;
-          return;
+          break;
         case "ArrowDown":
           this.reverse = true;
-          return;
+          break;
         case "ArrowLeft":
           this.left = true;
-          return;
+          break;
         case "ArrowRight":
           this.right = true;
-          return;
+          break;
       }
     });
     document.addEventListener("keyup", (e) => {
       switch (e.key) {
         case "ArrowUp":
           this.forward = false;
-          return;
+          break;
         case "ArrowDown":
           this.reverse = false;
-          return;
+          break;
         case "ArrowLeft":
           this.left = false;
-          return;
+          break;
         case "ArrowRight":
           this.right = false;
-          return;
+          break;
       }
     });
   }
