@@ -8,7 +8,7 @@ class BtnControls {
         this.#addEventListener(left,right,top,bottom)
     }
     #addEventListener(left,right){
-         document.addEventListener("ontouchstart", (e) => {
+         document.addEventListener("touchstart", (e) => {
             switch(e.target) {
                 case left:
                     this.left= true;
@@ -26,7 +26,7 @@ class BtnControls {
             console.table(this)
             alert(e.target)
          })
-         document.addEventListener("ontouchend", (e) => {
+         document.addEventListener("touchend", (e) => {
             switch(e.target) {
                 case left:
                     this.left= false;
